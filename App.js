@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, FlatList, Modal } from 'react-native';
+import { View,StyleSheet} from 'react-native';
 import uuid from 'react-native-uuid'
 import ModalDelete from './src/components/ModalDelete';
 import AddProduct from './src/components/AddProduct';
+import ListProduct from './src/components/ListProduct/ListProduct';
 
 const App = () => {
 
@@ -34,6 +35,10 @@ const App = () => {
     setModalVisible(false)
   }
 
+  const handlerCloseModal = () => {
+    setModalVisible(false);
+  }
+
   return (
     <View style={styles.container}>
       <AddProduct
@@ -42,30 +47,20 @@ const App = () => {
         onChangeTitle={setNewTitleProduct}
         onChangePrice={setNewPriceProduct}
         addProduct={handlerAddProduct}
-
-      
       />
-      <View style={styles.listContainer}>
-        <FlatList
-          data={products}
-          keyExtractor={item => item.id}
-          renderItem={({item})=> <View style={styles.cardContainer}> 
-                <Text>{item.title}</Text>
-                <Text>{item.price} $</Text>
-                <Button title="Eliminar" onPress={() => handlerModal(item)}/>
-                </View> }
-        />
-      </View>
-    <ModalDelete
-      product = {productSelected}
-      visible = {modalVisible}
+
+    <ListProduct
+      products = {products}
       onModal = {handlerModal}
-      
-      
-      onDelete = {handlerDeleteProduct}
+    />
       
 
-    />
+    <ModalDelete
+      product={productSelected}
+      visible={modalVisible}
+      onModal={handlerCloseModal}
+      onDelete={handlerDeleteProduct}
+/>
     </View>
   );
 }
@@ -78,17 +73,6 @@ const styles = StyleSheet.create({
     justifyContent: 'start',
     marginTop: "30px"
   },
-
-  listContainer:{
-  width:"100%",
-  },
-  cardContainer:{
-    backgroundColor:"grey",
-    flexDirection:"row",
-    margin: 20,
-    alignItems: "center",
-    justifyContent: "space-around",
-  }
 
 });
 

@@ -9,7 +9,7 @@ const ModalDelete = ({product,visible,onModal,onDelete}) => {
                     <Text>Está seguro que desea eliminar?</Text>
                     <Text>{product.title}</Text>
                     <Button title="Confirmo" onPress={onDelete} />
-                    <Button title="Cerrar" onPress={() =>onModal(false)}/>
+                    <Button title="Cerrar" onPress={onModal}/>
                 </View>
             </Modal>
 }
