@@ -1,8 +1,9 @@
 import { StyleSheet, View, Text } from "react-native";
 import { colors }  from "../Global/colors";
 
-const Header = ({title}) => {
+//Corresponde al encabezado.
 
+const Header = ({title}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{title}</Text>
@@ -11,6 +12,8 @@ const Header = ({title}) => {
 }
 
 export default Header
+
+//ESTILOS
 
 const styles = StyleSheet.create({
     container:{
@@ -22,8 +25,7 @@ const styles = StyleSheet.create({
     },
     text:{
         fontSize:20,
-
+        fontFamily:"Josefin",
     }
-
 })
 

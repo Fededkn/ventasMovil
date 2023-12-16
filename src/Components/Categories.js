@@ -1,19 +1,23 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 import categories from '../Data/categories.json'
-import CategoryItem from './CategoryItem'
+import CategoryItem from "./CategoryItem"
 
-const Categories = () => {
+//Muestra una lista de categorías desde un archivo JSON y utiliza FlatList para mostrar cada una de estas categorías como elementos de la lista. Para cada elemento de la lista, utiliza el componente CategoryItem, al que le pasa la función setCategorySelected como prop.
+
+const Categories = ({setCategorySelected}) => {
   return (
     <FlatList
         style={styles.container}
         data={categories}
         keyExtractor={item => item}
-        renderItem={({item}) => <CategoryItem category={item}/>}
+        renderItem={({item}) => <CategoryItem setCategorySelected={setCategorySelected} category={item}/>}
     />
   )
 }
 
 export default Categories
+
+// ESTILOS
 
 const styles = StyleSheet.create({
     container:{

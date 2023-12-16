@@ -1,18 +1,22 @@
 import { StyleSheet } from 'react-native'
 import Header from '../Components/Header'
-import Categories from '../Components/Categories'
+import Categories from '../components/Categories'
 
-const Home = () => {
+//Actúa como la pantalla principal de la aplicación. Header encabezado, Categories muestra categorías disponibles. Recibe setCategorySelected como prop desde App (padre) y la pasa al componente Categories. 
+
+const Home = ({setCategorySelected}) => {
   return (
     <>
-
       <Header title='Categories'/>
-      <Categories />
-     
+      <Categories setCategorySelected={setCategorySelected}/>
     </>
   )
 }
 
 export default Home
 
-const styles = StyleSheet.create({})
+//ESTILOS
+
+const styles = StyleSheet.create({
+
+})

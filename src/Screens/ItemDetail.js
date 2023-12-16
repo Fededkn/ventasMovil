@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 
+//Vista de los detalles de un artículo.
+
 const ItemDetails = () => {
   return (
     <View style={styles.container}>
@@ -9,6 +11,8 @@ const ItemDetails = () => {
 }
 
 export default ItemDetails
+
+//ESTILOS
 
 const styles = StyleSheet.create({
     container:{
