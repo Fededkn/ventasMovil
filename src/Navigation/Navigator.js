@@ -12,18 +12,6 @@ const Navigator = () => {
         <NavigationContainer>
             <Stack.Navigator
                 initialRouteName='Home'
-                screenOptions={
-                    ({route})=>{
-                        return {
-                            header: ()=>{
-                            return <Header  title={route.name === "Home" ? "Categoria" : 
-                                                    route.name === "ItemListCategories" ? route.params.category : 
-                                                    "Detalle Producto"
-                                            }/>
-                            }
-                        }
-                    }
-                }
             >
                 <Stack.Screen name="Home" component={Home}/>
                 <Stack.Screen name="ItemListCategories" component={ItemListCategories}/>

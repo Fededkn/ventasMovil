@@ -1,15 +1,10 @@
-import {View, Text, FlatList, Pressable} from "react-native"
-import categories from "../Data/categories.json";
+import Categories from "../Components/Categories"
 
-const Home = ({navigation}) => {
+const Home = ({navigation, route}) => {
   return (
-    <View>
-      <FlatList
-        data={categories}
-        keyExtractor={item => item}
-        renderItem={({item})=> <Pressable onPress={()=>{navigation.navigate("ItemListCategories",{category:item})}}><Text>{item}</Text></Pressable>}
-      />
-    </View>
+    <>
+      <Categories navigation={navigation} route={route}/>
+    </>
   )
 }
 

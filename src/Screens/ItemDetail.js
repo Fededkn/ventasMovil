@@ -17,9 +17,6 @@ const ItemDetail = ({route}) => {
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.goBack} title="atras" onPress={()=>setProductDetailId(0)}>
-        <Text>Atrás</Text>
-      </Pressable>
       <Image
         style={styles.image}
         source={{uri:product.thumbnail}}

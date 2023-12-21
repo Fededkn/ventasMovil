@@ -1,8 +1,4 @@
-import { StyleSheet, StatusBar, View, SafeAreaView } from 'react-native';
-import Home from './src/Screens/Home';
-import ItemListCategories from './src/Screens/ItemListCategories';
-import ItemDetail from "./src/Screens/ItemDetail";
-import { useEffect, useState } from 'react';
+import {StatusBar} from 'react-native';
 import {useFonts} from 'expo-font';
 import { colors } from './src/Global/colors';
 import Navigator from './src/Navigation/Navigator';
@@ -10,7 +6,6 @@ import Navigator from './src/Navigation/Navigator';
 const App = () => {
 
   const [fontLoaded] = useFonts({
-    
     Josefin:require("./assets/Fonts/JosefinSans-Bold.ttf"),
     PlayFair:require("./assets/Fonts/PlayfairDisplay-Regular.ttf"),  
   })
@@ -22,10 +17,8 @@ const App = () => {
       <StatusBar
         backgroundColor={colors.primary}/>
       <Navigator/>
-  </>
+    </>
   )
 }
+
 export default App
-
-//ESTILOS
-

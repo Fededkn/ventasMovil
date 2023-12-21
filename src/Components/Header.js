@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { colors } from '../Global/colors'
 
-const Header = ({title}) => {
+const Header = ({title = "Producto"}) => {
   return (
     <View style={styles.container}>
-      <Text>{title}</Text>
+      <Text style={styles.text}>{title}</Text>
     </View>
   )
 }

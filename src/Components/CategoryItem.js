@@ -4,9 +4,9 @@ import CardShadows from '../Wrappers/CardShadows'
 
 // Muestra una tarjeta por categoría, activa la función setCategorySelected con el nombre de la categoría como argumento (category), lo que permite seleccionar una categoría específica de la lista.
 
-const CategoryItem = ({category,setCategorySelected}) => {
+const CategoryItem = ({category, navigation, route}) => {
   return (
-        <Pressable onPress={()=>setCategorySelected(category)}>
+        <Pressable onPress={()=> navigation.navigate("ItemListCategories",[category])}>
             <CardShadows style={styles.container}>   
                 <Text style={styles.text}>{category}</Text>
             </CardShadows>

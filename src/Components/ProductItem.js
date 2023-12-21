@@ -1,23 +1,21 @@
 import { StyleSheet, Text, View, Image, Pressable, useWindowDimensions } from 'react-native'
 import { colors } from "../Global/colors"
-import { useEffect } from 'react'
 
 //Representa un elemento individual de producto en una lista.
 
-const ProductItem = ({item, setProductDetailId}) => {
+const ProductItem = ({item, navigation, route}) => {
 
     const {width} = useWindowDimensions()
-
-  return (
-    <Pressable style={styles.container} onPress={()=>setProductDetailId(item.id)}>
-        <Text style={width < 350 ? styles.textMin : styles.text}>{item.title}</Text>
-        <Image 
-            style={styles.image}
-            resizeMode='cover'
-            source={{uri:item.thumbnail}}
-        />
-    </Pressable>
-  )
+    return (
+        <Pressable style={styles.container} onPress={()=>navigation.navigate("ItemDetail", {id:item.id})}>
+            <Text style={width < 350 ? styles.textMin : styles.text}>{item.title}</Text>
+            <Image 
+                style={styles.image}
+                resizeMode='cover'
+                source={{uri:item.thumbnail}}
+            />
+        </Pressable>
+    )
 }
 
 //ESTILOS
