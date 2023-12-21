@@ -1,44 +1,26 @@
-import { StyleSheet, FlatList, View, Text, Pressable } from 'react-native'
-import Header from "../Components/Header"
-import Search from "../Components/Search"
+import {View, Text, FlatList, Pressable, StyleSheet} from "react-native"
 import allProducts from "../Data/products.json"
-import ProductItem from '../Components/ProductItem'
-import { useEffect, useState } from 'react'
-import { colors } from '../Global/colors'
+import { useEffect, useState } from 'react';
+import { colors } from "../Global/colors";
 
-//Muestra una lista de productos filtrada por una categoría recibida en "category" como prop desde App (padre).
+const ItemListCategories = ({navigation, route}) => {
 
-const ItemListCategories = ({category, setCategorySelected, setProductDetailId}) => {
-  
-  const [keyword,setKeyword] = useState("")
-  const [products, setProducts] = useState(allProducts)
+  const { category } = route.params
+  const [products, setProducts] = useState([])
 
   useEffect(()=>{
+    const productsFilted= allProducts.filter(product => product.category === category)
+    setProducts(productsFilted)
+  },[category])
 
-    if(category){
-      const productCategory = allProducts.filter(product => product.category === category) // Filtra por categoría
-      const productsFiltered = productCategory.filter(product => product.title.includes(keyword)) // Filtra por palabra clave
-      setProducts(productsFiltered) // Actualiza los productos filtrados
-    }else{
-      const productsFiltered = allProducts.filter(product => product.title.includes(keyword)) // Filtra por palabra clave si no hay categoría
-      setProducts(productsFiltered) // Actualiza los productos filtrados
-    }
-  },[keyword]) // Se ejecuta cuando cambia la palabra clave
-  
   return (
-    <>
-      <Header />
-      <Search setKeyword={setKeyword}/>
-      <Pressable style={styles.goBack} title="atras" onPress={()=>setCategorySelected("")}>
-        <Text>Atrás</Text>
-      </Pressable>
-      <FlatList 
-        style={styles.container}
+    <View>
+      <FlatList
         data={products}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => <ProductItem setProductDetailId={setProductDetailId} item={item}/>}
-              />
-    </>
+        keyExtractor={item=> item.id}
+        renderItem={({item}) => <Pressable onPress={()=> {navigation.navigate("ItemDetail",{id:item.id})}}><Text>{item.title}</Text></Pressable>}
+      />
+    </View>
   )
 }
 

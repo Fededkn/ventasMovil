@@ -1,14 +1,12 @@
-import { StyleSheet, View, Text } from "react-native";
-import { colors }  from "../Global/colors";
-
-//Corresponde al encabezado.
+import { StyleSheet, Text, View } from 'react-native'
+import { colors } from '../Global/colors'
 
 const Header = ({title}) => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.text}>{title}</Text>
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      <Text>{title}</Text>
+    </View>
+  )
 }
 
 export default Header
@@ -26,6 +24,5 @@ const styles = StyleSheet.create({
     text:{
         fontSize:20,
         fontFamily:"Josefin",
-    }
+    },
 })
-

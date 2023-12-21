@@ -1,21 +1,22 @@
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
-import { colors } from '../Global/colors';
+import {View, Text, Image, StyleSheet} from "react-native"
 import allProducts from "../Data/products.json"
-import Header from '../Components/Header';
+import { useEffect, useState } from 'react';
+import { colors } from "../Global/colors"
+import { Pressable } from "react-native";
 
-const ItemDetails = ({ productDetailId, setProductDetailId }) => {
+const ItemDetail = ({route}) => {
 
-  const [product,setProduct] = useState ([]);
+  const {id} = route.params
+  const [product, setProduct] = useState({})
+
 
   useEffect(()=>{
-    const productFinded = allProducts.find(product => product.id === productDetailId)
+    const productFinded = allProducts.find(product => product.id === id)
     setProduct(productFinded)
-  },[productDetailId])
+  },[id])
 
   return (
     <View style={styles.container}>
-      <Header />
       <Pressable style={styles.goBack} title="atras" onPress={()=>setProductDetailId(0)}>
         <Text>Atrás</Text>
       </Pressable>
@@ -37,10 +38,11 @@ const ItemDetails = ({ productDetailId, setProductDetailId }) => {
       </View>
       
     </View>
-  );
-};
+  )
+}
 
-export default ItemDetails;
+export default ItemDetail
+
 
 const styles = StyleSheet.create({
   container: {
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     width:"100%",
     alignItems: 'center',
     justifyContent: 'start',
-    backgroundColor: colors.secondary,
+    // backgroundColor: colors.secondary,
   },
   image: {
     width: "100%",
@@ -85,4 +87,3 @@ const styles = StyleSheet.create({
     color:"white",
   }
 });
-
