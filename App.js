@@ -1,12 +1,15 @@
-import { StyleSheet, StatusBar, View } from 'react-native';
+import { StyleSheet, StatusBar, View, SafeAreaView } from 'react-native';
 import Home from './src/Screens/Home';
 import ItemListCategories from './src/Screens/ItemListCategories';
-import { useState } from 'react';
+import ItemDetail from "./src/Screens/ItemDetail";
+import { useEffect, useState } from 'react';
 import {useFonts} from 'expo-font';
+import { colors } from './src/Global/colors';
 
 const App = () => {
 
   const [categorySelected,setCategorySelected] = useState("")
+  const [productDetailId,setProductDetailId] = useState(0)
 
   const [fontLoaded] = useFonts({
     
@@ -18,9 +21,24 @@ const App = () => {
   if(!fontLoaded) return null //Evita que la aplicación se renderice hasta que las fuentes se carguen por completo.
 
   return (
-    <View style={styles.container}>
-      {categorySelected ? <ItemListCategories category={categorySelected}/> : <Home setCategorySelected={setCategorySelected}/>}
-    </View>
+    <>
+      <StatusBar
+        backgroundColor={colors.primary}
+      />
+      <SafeAreaView style={styles.container}>
+      {categorySelected ?
+      productDetailId != 0 ?
+          <ItemDetail productDetailId={productDetailId} setProductDetailId={setProductDetailId} />
+          :
+          <ItemListCategories 
+          category={categorySelected} 
+          setCategorySelected={setCategorySelected}
+          setProductDetailId={setProductDetailId}/> 
+      : 
+      <Home setCategorySelected={setCategorySelected}/>}
+    </SafeAreaView>
+    </>
+   
   );
 }
 
@@ -34,6 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'start',
+    width: "100%",
   },
 
 });

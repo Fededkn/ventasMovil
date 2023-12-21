@@ -1,18 +1,22 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable, useWindowDimensions } from 'react-native'
 import { colors } from "../Global/colors"
+import { useEffect } from 'react'
 
 //Representa un elemento individual de producto en una lista.
 
-const ProductItem = ({item}) => {
+const ProductItem = ({item, setProductDetailId}) => {
+
+    const {width} = useWindowDimensions()
+
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={()=>setProductDetailId(item.id)}>
+        <Text style={width < 350 ? styles.textMin : styles.text}>{item.title}</Text>
         <Image 
             style={styles.image}
             resizeMode='cover'
             source={{uri:item.thumbnail}}
         />
-        <Text style={styles.text}>{item.title}</Text>
-    </View>
+    </Pressable>
   )
 }
 
@@ -30,10 +34,20 @@ const styles = StyleSheet.create({
         borderRadius:5,
         flexDirection:"row",
         alignItems:"center",
-        justifyContent:"space-around",
+        justifyContent:"space-between",
     },
     image:{
-        width:70,
-        height: 70,
-    }
+        minWidth: 90,
+        maxWidth: 90,
+        height: 90,
+        width:"30%",
+    },
+    text:{
+        width: "60%",
+        fontSize: 20,
+    },
+        textMin:{
+            fontSize: 15,
+        }
 })
+
