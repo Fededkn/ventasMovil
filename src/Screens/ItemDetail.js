@@ -1,19 +1,16 @@
 import {View, Text, Image, StyleSheet} from "react-native"
-import allProducts from "../Data/products.json"
 import { useEffect, useState } from 'react';
 import { colors } from "../Global/colors"
 import { Pressable } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem } from "../features/cart/cartSlice";
 
 const ItemDetail = ({route}) => {
 
-  const {id} = route.params
-  const [product, setProduct] = useState({})
+  const dispatch = useDispatch()
+  const product = useSelector((state)=> state.shop.value.productSelected)
+  // const images = product.images ? product.images : []
 
-
-  useEffect(()=>{
-    const productFinded = allProducts.find(product => product.id === id)
-    setProduct(productFinded)
-  },[id])
 
   return (
     <View style={styles.container}>
@@ -29,8 +26,8 @@ const ItemDetail = ({route}) => {
 
       <View style={styles.containerPrice}>
         <Text style={styles.price}>$ {product.price}</Text>
-        <Pressable style={styles.buyNow}> 
-          <Text style={styles.buyNowText}>Comprar ahora!</Text>
+        <Pressable style={styles.buyNow} onPress={()=> dispatch(addItem(product))}> 
+          <Text style={styles.buyNowText}>Agregar!</Text>
         </Pressable>
       </View>
       

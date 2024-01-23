@@ -13,11 +13,11 @@ export default CardShadows
 const styles = StyleSheet.create({
   container:{
     shadowColor: "#000",
-    shadowOffset: {width: 10, height: 10,},
-    shadowOpacity: 0.51,
-    shadowRadius: 13.16,
+    shadowOffset: {width: 8, height: 8,},
+    shadowOpacity: 0.21,
+    shadowRadius: 9.16,
 
-    elevation: 20,
+    elevation: 15,
 
   }
 })

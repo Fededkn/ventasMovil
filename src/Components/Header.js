@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { colors } from '../Global/colors'
 
 const Header = ({title = "Producto"}) => {
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>
@@ -24,5 +25,6 @@ const styles = StyleSheet.create({
     text:{
         fontSize:20,
         fontFamily:"Josefin",
+        color: "white",
     },
 })

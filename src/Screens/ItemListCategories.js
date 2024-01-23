@@ -1,26 +1,28 @@
 import {View, Text, FlatList, Pressable, StyleSheet} from "react-native"
-import allProducts from "../Data/products.json"
 import { useEffect, useState } from 'react';
-import { colors } from "../Global/colors";
 import Search from "../Components/Search"
 import ProductItem from "../Components/ProductItem"
+import { useGetProductsQuery } from "../App/services/shopServices";
 
 const ItemListCategories = ({navigation, route}) => {
 
-  const { category } = route.params
+  const {category} = route.params
+  const {data, isLoading, error} = useGetProductsQuery(category)
   const [keyword, setKeyword] = useState("")
-  const [products, setProducts] = useState(allProducts)
+  const [products, setProducts] = useState()
+
 
   useEffect(()=>{
 
-    if(category){
-      const productsCategory = allProducts.filter(product => product.category === category)
-      const productsFiltered = productsCategory.filter(product => product.title.includes(keyword))
+    if(!isLoading) {
+      const dataArray = Object.values(data) 
+      const productsFiltered = dataArray.filter(product => product.title.includes(keyword))
       setProducts(productsFiltered)
-    }else{
-      const productsFiltered = allProducts.filter(product => product.title.includes(keyword))
+
     }
-  },[keyword])
+      
+
+  },[keyword, data])
 
   return (
     <>
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     width:"100%",
   },
   goBack:{
-    backgroundColor: colors.secondary,
+    backgroundColor: "white",
     width:"100%",
   }
 })
