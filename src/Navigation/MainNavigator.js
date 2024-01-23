@@ -3,13 +3,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './TabNavigator';
 import { useState } from 'react';
 import AuthStack from './authStack';
+import { useSelector } from 'react-redux';
 
 const MainNavigator = () => {
 
-    const [usuario, setUsuario] = useState("")
+    const idToken = useSelector(state => state.auth.value.idToken)
+
   return (
     <NavigationContainer style={styles.tabNavigator}>
-        {usuario ? <TabNavigator/> : <AuthStack/>}
+        {idToken ? <TabNavigator/> : <AuthStack/>}
     </NavigationContainer>
   )
 }

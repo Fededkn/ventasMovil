@@ -4,21 +4,31 @@ import { View, Text, StyleSheet, Pressable } from 'react-native'
 import InputForm from '../Components/InputForm'
 import SubmitButton from '../Components/SubmitButton'
 import { useSignupMutation } from '../App/services/auth'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../features/auth/authSlice'
+import { signupSchema } from '../validations/signupSchema'
 
 const Signup = ({navigation}) => {
 
+    const dispatch = useDispatch()
     const [triggerSignup,{data,isError,isSuccess,error,isLoading}] = useSignupMutation()
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [confirmPassword,setConfirmPassword] = useState("")
     
     useEffect(()=> {
-        if(isSuccess) console.log(data)
+        if(isSuccess) dispatch(setUser(data))
         if(isError) console.log(error)
     }, [data,isError,isSuccess])
 
     const onSubmit = () => {
-        triggerSignup({email,password})
+        try {
+            signupSchema({email,password,confirmPassword})
+            triggerSignup({email,password})
+        } catch (error) {
+            console.log(error.path)
+            console.log(error.message)
+        }
     }
 
     return (

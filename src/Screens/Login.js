@@ -4,15 +4,18 @@ import { colors } from "../Global/colors";
 import InputForm from "../Components/InputForm";
 import SubmitButton from "../Components/SubmitButton"; 
 import { useLoginMutation } from "../App/services/auth"
+import { useDispatch } from 'react-redux'
+import { setUser } from '../features/auth/authSlice'
 
 const Login = ({navigation}) => {
 
+    const dispatch = useDispatch()
     const [triggerLogin,{data,isError,isSuccess,error,isLoading}] = useLoginMutation()
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
 
     useEffect(()=> {
-        if(isSuccess) console.log(data)
+        if(isSuccess) dispatch(setUser(data))
         if(isError) console.log(error)
     }, [data,isError,isSuccess])
 

@@ -4,11 +4,13 @@ import { shopApi } from "./services/shopServices"
 import { setupListeners } from "@reduxjs/toolkit/query"
 import cartReducer from "../features/cart/cartSlice"
 import { authApi } from "./services/auth"
+import authReducer from "../features/auth/authSlice"
 
 export const store = configureStore ({
     reducer: {
         shop:shopReducer,
         cart:cartReducer,
+        auth:authReducer,
         [shopApi.reducerPath]: shopApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
     },
