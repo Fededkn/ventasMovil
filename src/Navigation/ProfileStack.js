@@ -3,6 +3,7 @@ import Header from '../Components/Header';
 
 import ImageSelector from '../Screens/ImageSelector';
 import MyProfile from '../Screens/MyProfile';
+import LocationSelector from '../Screens/LocationSelector';
 
 
 const Stack = createNativeStackNavigator()
@@ -21,6 +22,7 @@ const ProfileStack = () => {
 >
     <Stack.Screen name="MyProfile" component={MyProfile} />
     <Stack.Screen name="ImageSelector" component={ImageSelector} />
+    <Stack.Screen name="LocationSelector" component={LocationSelector} />
 </Stack.Navigator>
   )
 }

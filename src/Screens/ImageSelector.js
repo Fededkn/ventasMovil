@@ -1,17 +1,21 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react'
 import AddButton from '../Components/AddButton'
 import * as ImagePicker from 'expo-image-picker'
-import { usePostProfileImageMutation } from '../App/services/shopServices'
+import { useGetProfileImagenQuery, usePostProfileImageMutation } from '../App/services/shopServices'
 import { useSelector } from 'react-redux'
 
 const ImageSelector = ({navigation}) => {
 
     const [image,setImage] = useState("")
     const [triggerProfileImage] = usePostProfileImageMutation()
-
     const localId = useSelector(state => state.auth.value.localId)
+    const [data,isSuccess] = useGetProfileImagenQuery(localId)
+
+    useEffect(()=> {
+        if(isSuccess && data) setImage(data.image)
+    },[isSuccess])
 
     const pickImage = async () => {
         const {granted} = await ImagePicker.requestCameraPermissionsAsync()

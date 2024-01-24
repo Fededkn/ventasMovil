@@ -10,6 +10,8 @@ import { Provider } from 'react-redux'
 import Signup from "./src/Screens/Signup"
 import Login from './src/Screens/Login';
 import MainNavigator from './src/Navigation/MainNavigator';
+import LocationSelector from './src/Screens/LocationSelector';
+import { StyleSheet } from 'react-native';
 
 const Stack = createNativeStackNavigator()
 
