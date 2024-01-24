@@ -4,6 +4,7 @@ import TabNavigator from './TabNavigator';
 import { useState } from 'react';
 import AuthStack from './authStack';
 import { useSelector } from 'react-redux';
+import MyProfile from '../Screens/MyProfile';
 
 const MainNavigator = () => {
 

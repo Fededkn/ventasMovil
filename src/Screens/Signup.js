@@ -15,19 +15,32 @@ const Signup = ({navigation}) => {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [confirmPassword,setConfirmPassword] = useState("")
-    
-    useEffect(()=> {
-        if(isSuccess) dispatch(setUser(data))
-        if(isError) console.log(error)
-    }, [data,isError,isSuccess])
+
+    const [emailError,setEmailError] = useState("")
+    const [passwordError,setPasswordError] = useState("")
+    const [confirmPasswordError,setConfirmPasswordError] = useState("")
 
     const onSubmit = () => {
         try {
-            signupSchema({email,password,confirmPassword})
+            setPasswordError("")
+            setEmailError("")
+            setConfirmPasswordError("")
+            signupSchema.validateSync({email,password,confirmPassword})
             triggerSignup({email,password})
         } catch (error) {
-            console.log(error.path)
-            console.log(error.message)
+            switch(error.path){
+                case "email":
+                    setEmailError(error.message)
+                    break
+                case "password":
+                    setPasswordError(error.message)
+                    break
+                case "confirmPassword":
+                    setConfirmPasswordError(error.message)
+                    break
+                default:
+                    break
+            }
         }
     }
 
@@ -40,21 +53,21 @@ const Signup = ({navigation}) => {
                     value={email}
                     onChangeText={(t)=> setEmail(t)}
                     isSecure = {false}
-                    error= ""
+                    error= {emailError}
                 />
                 <InputForm 
                     label="Contraseña"
                     value={password}
                     onChangeText={(t)=> setPassword(t)}
                     isSecure = {true}
-                    error= ""
+                    error= {passwordError}
                 />
                 <InputForm 
                     label="Confirmar contraseña"
                     value={confirmPassword}
                     onChangeText={(t)=> setConfirmPassword(t)}
                     isSecure = {true}
-                    error= ""
+                    error= {confirmPassword}
                 />
                 <SubmitButton title="Send" onPress={onSubmit}
                 />
