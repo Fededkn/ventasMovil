@@ -12,9 +12,7 @@ const MainNavigator = () => {
 
   return (
     <NavigationContainer style={styles.tabNavigator}>
-        {/* {idToken ? <TabNavigator/> : <AuthStack/>} */}
-        <TabNavigator/>
-        {/* <MyProfile /> */}
+        {idToken ? <TabNavigator/> : <AuthStack/>}
     </NavigationContainer>
   )
 }

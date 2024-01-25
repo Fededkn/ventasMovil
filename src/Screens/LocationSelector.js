@@ -37,15 +37,16 @@ const LocationSelector = ({navigation}) => {
                 if(location.latitude){
                     const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=${googleApi.mapStatic}`)
                     const data = await response.json()
+                    console.log(data.results[0].formatted_address)
                     setAddress(data.results[0].formatted_address)
                 }
             } catch (error) {
                 setErrorMsg(error.message)
-            }
+            } 
         })
     },[location])
 
-    const onConfirmAddres = async () => {
+    const onConfirmAddress = async () => {
         try {
             const locationFormatted = {
                 address,
@@ -61,9 +62,9 @@ const LocationSelector = ({navigation}) => {
 
     return (
     <View style={styles.container}>
-      <Text style={styles.text}>Direccion: {address}</Text>
+      <Text style={styles.text}>Direccion: {location.address} {address}</Text>
         <MapsPreview latitude={location.latitude} longitude={location.longitude}/>
-        <AddButton title="Confirmar localización" onPress={onConfirmAddres} />
+        <AddButton title="Confirmar localización" onPress={onConfirmAddress} />
     </View>
   )
 }
@@ -78,7 +79,8 @@ const styles = StyleSheet.create({
         gap:20,
     },
     text:{
-        fontSize:20
+        fontSize:20,
+        color:"black",
     },
     
 })

@@ -11,7 +11,7 @@ const ImageSelector = ({navigation}) => {
     const [image,setImage] = useState("")
     const [triggerProfileImage] = usePostProfileImageMutation()
     const localId = useSelector(state => state.auth.value.localId)
-    const [data,isSuccess] = useGetProfileImagenQuery(localId)
+    const {data,isSuccess} = useGetProfileImagenQuery(localId)
 
     useEffect(()=> {
         if(isSuccess && data) setImage(data.image)
