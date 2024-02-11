@@ -18,12 +18,16 @@ export const authSlice = createSlice({
         state.value.localId = action.payload.localId
     }
   },
-//Armar método para borrar.
-  clearUser: () => {
 
+  clearUser: (state) => {
+    state.value = {
+      email: null,
+      idToken: null,
+      localId: null,
+    }
   }
 })
 
-export const { setUser } = authSlice.actions
+export const { clearUser, setUser } = authSlice.actions
 
 export default authSlice.reducer

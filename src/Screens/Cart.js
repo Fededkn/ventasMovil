@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     confirmText: {
-        fontSize: "20px",
+        fontSize: 20,
     },
     totalText: {
-        fontSize: "20px",
+        fontSize: 20,
     },
 })

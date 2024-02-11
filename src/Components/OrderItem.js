@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         flexDirection:"row",
         alignItems: "center",
-        borderRadius: "5px",
+        borderRadius: 5,
         borderWidth: 1,
     },
     textContainer: {

@@ -6,6 +6,7 @@ import SubmitButton from "../Components/SubmitButton";
 import { useLoginMutation } from "../App/services/auth"
 import { useDispatch } from 'react-redux'
 import { setUser } from '../features/auth/authSlice'
+import { insertSession } from "../database";
 
 const Login = ({navigation}) => {
 
@@ -14,10 +15,19 @@ const Login = ({navigation}) => {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
 
+    //SQL
+
     useEffect(()=> {
-        if(isSuccess) dispatch(setUser(data))
+        if(isSuccess) {
+            dispatch(setUser(data))
+            insertSession(data)
+                .then(()=> console.log(result))
+                .catch(err => console.log(err))
+        }
         if(isError) console.log(error)
     }, [data,isError,isSuccess])
+
+    //SQL
 
     const onSubmit = () => {
         triggerLogin({email,password})
