@@ -5,13 +5,11 @@ import { colors } from '../Global/colors'
 
 const OrderItem = ({order}) => {
 
-    const total = order.items.reduce((acc,product)=> acc + (product.price *product.quantity),0)
-
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
         <Text style={styles.date}>Fecha: {new Date(order.createdAt).toLocaleString()}</Text>
-        <Text style={styles.total}>Total: $ {total}</Text>
+        <Text style={styles.total}>Total: $ {order.total}</Text>
       </View>
       <Feather name='search' size={25} color={"black"}/>
     </View>

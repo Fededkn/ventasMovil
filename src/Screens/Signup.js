@@ -5,13 +5,14 @@ import InputForm from '../Components/InputForm'
 import SubmitButton from '../Components/SubmitButton'
 import { useSignupMutation } from '../App/services/auth'
 import { useDispatch } from 'react-redux'
-import { setUser } from '../features/auth/authSlice'
 import { signupSchema } from '../validations/signupSchema'
+import { insertSession } from '../database'
+import { setUser } from '../features/auth/authSlice'
 
 const Signup = ({navigation}) => {
 
     const dispatch = useDispatch()
-    const [triggerSignup,{data,isError,isSuccess,error,isLoading}] = useSignupMutation()
+    const [triggerSignup,{data,isSuccess,error,isLoading}] = useSignupMutation()
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [confirmPassword,setConfirmPassword] = useState("")
@@ -19,6 +20,15 @@ const Signup = ({navigation}) => {
     const [emailError,setEmailError] = useState("")
     const [passwordError,setPasswordError] = useState("")
     const [confirmPasswordError,setConfirmPasswordError] = useState("")
+
+    useEffect(()=>{
+        if(isSuccess) {
+            dispatch(setUser(data))
+            insertSession(data)
+            .then(result => console.log(result))
+            .catch(err => console.log(err))
+        }
+    },[isSuccess])
 
     const onSubmit = () => {
         try {
