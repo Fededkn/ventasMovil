@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, ActivityIndicator} from 'react-native'
-import { colors } from '../Global/colors'
+import { View, ActivityIndicator } from 'react-native'
 
 const Loading = () => {
     return (

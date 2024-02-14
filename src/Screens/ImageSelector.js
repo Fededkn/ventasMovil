@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import { useEffect, useState } from 'react'
 import React from 'react'
 import AddButton from '../Components/AddButton'

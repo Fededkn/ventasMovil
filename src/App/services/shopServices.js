@@ -3,19 +3,23 @@ import { base_url } from '../../firebase/database'
 
 export const shopApi = createApi({
 
+    reducerPath: 'shopApi',
     baseQuery: fetchBaseQuery({ baseUrl: base_url }),
     tagTypes:["image","location","order"],
     endpoints: (builder) => ({
+        //Método se utiliza para obtener una lista de productos de una determinada categoría
         getProducts: builder.query({
             query: (category) => `products.json?orderBy="category"&equalTo="${category}"`,
         }),
+        //Método se utiliza para obtener un producto con su detalle específico por su ID
         getProduct: builder.query({
             query: (id) => `products/${id}.json`
         }),
+        //Método se utiliza para obtener una lista de categorías de productos
         getCategories: builder.query({
             query: () => "categories.json"
         }),
-        //Método para 
+        //Método para guardar las ordenes
         postOrders: builder.mutation({
             query: ({localId,order}) => ({
                 url:`orders/${localId}.json`,
@@ -24,6 +28,7 @@ export const shopApi = createApi({
             }),
             invalidatesTags:["order"]
         }),
+        //Método para traer las ordenes
         getOrders: builder.query({
             query: (localId) => `orders/${localId}.json`,
             transformResponse:(response) => {
@@ -52,11 +57,11 @@ export const shopApi = createApi({
             query: ({localId,locationFormatted}) => ({
                 url:`userLocation/${localId}.json`,
                 method:"PUT",
-                body: locationFormatted
+                body: locationFormatted,
             }),
             invalidatesTags:["location"]
         }),
-        //Método traer localización
+        //Método para traer localización
         getUserLocation: builder.query({
             query: (localId) => `userLocation/${localId}.json`,
             providesTags:["location"]

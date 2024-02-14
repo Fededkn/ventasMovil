@@ -14,7 +14,6 @@ const initialState = {
 export const shopSlice = createSlice({
     name: "shop",
     initialState,
-    //Modificar el estado, recibe un objeto que tiene los métodos para modificar.
     reducers: {
         setProductsFilteredByCategory: (state, actions) => {
             state.value.productsFilteredByCategory = state.value.products.filter(product => product.category === actions.payload)
@@ -26,5 +25,4 @@ export const shopSlice = createSlice({
 })
 
 export const { setProductsFilteredByCategory, setProductSelected } = shopSlice.actions
-
 export default shopSlice.reducer

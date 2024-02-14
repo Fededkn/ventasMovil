@@ -3,7 +3,7 @@ import { colors } from '../Global/colors'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { deleteSession } from '../database'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearUser } from '../features/auth/authSlice'
+
 
 import * as authSlice from '../features/auth/authSlice';
 
@@ -31,19 +31,18 @@ const Header = ({title = "Producto"}) => {
 
 export default Header
 
-//ESTILOS
-
 const styles = StyleSheet.create({
     container:{
         backgroundColor:colors.primary,
         width: "100%",
-        height:80,
+        height: 115,
         justifyContent:"center",
         alignItems:"center",
-        marginTop:30,
         marginRight:60,
+        paddingTop: 30,
     },
     text:{
+
         fontSize:20,
         fontFamily:"Josefin",
         color: "white",
@@ -51,5 +50,6 @@ const styles = StyleSheet.create({
     logoutButton:{
       position: "absolute",
       right: 10,
+      paddingTop: 30,
     },
 })

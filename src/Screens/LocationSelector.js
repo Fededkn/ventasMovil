@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import AddButton from '../Components/AddButton'
 import * as Location from 'expo-location'

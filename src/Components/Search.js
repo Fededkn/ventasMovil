@@ -5,12 +5,8 @@ import { useState } from 'react'
 
 const Search = ({setKeyword}) => {
 
-    // Estado local: input para almacenar el texto ingresado y error para manejar mensajes de error.
-
     const [input,setInput] = useState("")
     const [error,setError] = useState("")
-
-    // Función para realizar la búsqueda, realiza una validación para verificar si el texto de búsqueda contiene números y muestra un mensaje de error en caso afirmativo.
 
     const seach = () => {
         const expression = /.*[0-9].*/
@@ -21,14 +17,12 @@ const Search = ({setKeyword}) => {
         }      
     }
 
-    // Función removeItem para limpiar el input y el mensaje de error.
-
     const removeItem = () =>{
         setInput("")
         setError("")
     }
   return (
-    <View>
+    <View style={styles.container}>
         <View style={styles.containerInput}>
             <TextInput style={styles.input} placeholder="Buscar" value={input} onChangeText={(t)=> setInput(t)}/>
             <Pressable onPress={seach}>
@@ -45,9 +39,12 @@ const Search = ({setKeyword}) => {
 
 export default Search
 
-//ESTILOS
-
 const styles = StyleSheet.create({
+    container:{
+        height: 70,
+        justifyContent: 'center',
+        alignItems:'center',
+    }, 
     containerInput:{
         width:"90%",
         alignItems:"center",
@@ -59,6 +56,7 @@ const styles = StyleSheet.create({
       color: "white",
       borderRadius: 5,
       width: "80%",
+      height:40,
       fontSize:20,
 
     }

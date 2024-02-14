@@ -1,33 +1,31 @@
-import { Pressable, StyleSheet, Text } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { colors } from '../Global/colors'
 import CardShadows from '../Wrappers/CardShadows'
 import { useDispatch } from 'react-redux'
 import { setProductsFilteredByCategory } from '../features/shop/shopSlice'
-
-// Muestra una tarjeta por categoría, activa la función setCategorySelected con el nombre de la categoría como argumento (category), lo que permite seleccionar una categoría específica de la lista.
 
 const CategoryItem = ({category, navigation, route}) => {
 
     const dispatch = useDispatch()
 
   return (
-        <Pressable onPress={()=> {
+        <View> 
+            <Pressable onPress={()=> {
             dispatch(setProductsFilteredByCategory(category))
-            navigation.navigate("Category",{category})}
-        }>
-            <CardShadows style={styles.container}>   
-                <Text style={styles.text}>{category}</Text>
-            </CardShadows>
-        </Pressable>
+            navigation.navigate("Category",{category})}}>
+                <CardShadows style={styles.containerCard}>   
+                    <Text style={styles.text}>{category}</Text>
+                </CardShadows>
+            </Pressable>
+        </View>
+        
   )
 }
    
 export default CategoryItem
 
-// ESTILOS
-
 const styles = StyleSheet.create({
-    container:{
+    containerCard:{
         backgroundColor: colors.secondary,
         padding:20,
         margin:10,

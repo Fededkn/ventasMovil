@@ -20,6 +20,5 @@ const styles = StyleSheet.create({
     textIcon:{
         color:"white",
         textAlign:"center",
-
     },
 })

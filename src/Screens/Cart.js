@@ -1,33 +1,47 @@
 import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
 import CartItem from '../Components/CartItem'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { usePostOrdersMutation } from '../App/services/shopServices'
-import { useEffect } from 'react'
+import React, { useState } from 'react'
+import MessageModal from '../Components/Modal/MessageModal'
+import { removeItem } from '../features/cart/cartSlice'
 
 const Cart = () => {
 
+    const dispatch = useDispatch();
+
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [modalMessage, setModalMessage] = useState('')
+
     const localId = useSelector(state => state.auth.value.localId)
-
     const cart = useSelector(state => state.cart.value)
-
+    
     const [triggerPostOrder,data,isSuccess,isError,error] = usePostOrdersMutation()
 
-    useEffect(()=>{
+    const handleConfirmOrder = () => {
+        triggerPostOrder({ localId, order: cart });
+        setModalMessage("Orden cargada satisfactoriamente")
+        setIsModalVisible(true);
+      };
 
-    },[data,isError,isSuccess,error])
+      const handleDeleteItem = (productId) => {
+        dispatch(removeItem(productId));
+      };
+    
 
   return (
     <View style={styles.container}>
         <FlatList 
             data={cart.items}
             keyExtractor={item => item.id}
-            renderItem={({item})=> <CartItem item={item}/>}
+            renderItem={({item})=> <CartItem item={item} onDelete={handleDeleteItem}/>}
         />
         <View style={styles.confirmContainer}>
-            <Pressable onPress={()=> triggerPostOrder({localId,order:cart})}>
+            <Pressable onPress={handleConfirmOrder}>
                 <Text style={styles.confirmText}>Confirmar</Text>
             </Pressable>
             <Text style={styles.totalText}>Total: $ {cart.total}</Text>
+            <MessageModal isVisible={isModalVisible} onClose={() => setIsModalVisible(false)} message={modalMessage} />
         </View>
     </View>
       )

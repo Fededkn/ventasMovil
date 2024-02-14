@@ -1,4 +1,4 @@
-import {View, Text, FlatList, Pressable, StyleSheet} from "react-native"
+import {FlatList, StyleSheet} from "react-native"
 import { useEffect, useState } from 'react';
 import Search from "../Components/Search"
 import ProductItem from "../Components/ProductItem"
@@ -34,13 +34,10 @@ const ItemListCategories = ({navigation, route}) => {
         renderItem={({item}) => <ProductItem item={item} navigation={navigation} route={route} />}
       />
     </>
-
   )
 }
 
 export default ItemListCategories
-
-//ESTILOS
 
 const styles = StyleSheet.create({
   container:{

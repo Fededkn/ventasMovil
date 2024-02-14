@@ -3,56 +3,55 @@ import { colors } from "../Global/colors"
 import { useDispatch } from 'react-redux'
 import { setProductSelected } from '../features/shop/shopSlice'
 
-//Representa un elemento individual de producto en una lista.
-
 const ProductItem = ({item, navigation, route}) => {
 
     const {width} = useWindowDimensions()
     const dispatch = useDispatch()
     
-    return (
-        <Pressable style={styles.container} onPress={()=>{
-            dispatch(setProductSelected(item.id))
-            navigation.navigate("Product", {id:item.id})
-
-            }}>
-            <Text style={width < 350 ? styles.textMin : styles.text}>{item.title}</Text>
-            <Image 
-                style={styles.image}
-                resizeMode='cover'
-                source={{uri:item.thumbnail}}
-            />
-        </Pressable>
-    )
-}
-
-//ESTILOS
+return (
+    <View style={styles.container}>
+        <Pressable
+        style={[styles.cardContainer,{ width: width * 0.9 }]}
+        onPress={() => {
+            dispatch(setProductSelected(item.id));
+            navigation.navigate("Product", {id: item.id});
+        }}
+    >
+        <Image 
+            style={styles.image}
+            resizeMode='cover'
+            source={{uri: item.thumbnail}}
+        />
+        <Text style={styles.title}>{item.title}</Text>
+    </Pressable>
+    </View>
+);
+};
 
 export default ProductItem
 
 const styles = StyleSheet.create({
     container:{
-        width:"80%",
+        paddingVertical: 15,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    cardContainer:{
         backgroundColor: colors.secondary,
-        margin:10,
-        paddingHorizontal:"10%",
-        paddingVertical:10,
+        borderWidth:1,
         borderRadius:5,
-        flexDirection:"row",
-        alignItems:"center",
-        justifyContent:"space-between",
     },
     image:{
-        minWidth: 90,
-        maxWidth: 90,
-        height: 90,
-        width:"30%",
+        width: '100%',
+        height: 200,
+        borderTopLeftRadius: 5,
+        borderTopRightRadius: 5,
     },
-    text:{
-        width: "60%",
-        fontSize: 20,
+    title:{
+        fontSize: 18,
+        marginTop: 10,
+        marginBottom: 10,
+        textAlign: 'center',
     },
-        textMin:{
-            fontSize: 15,
-        }
-})
+});

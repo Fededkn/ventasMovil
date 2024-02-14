@@ -1,15 +1,15 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Cart from '../Screens/Cart'
 import Signup from '../Screens/Signup';
 import Login from '../Screens/Login';
 import Header from '../Components/Header';
+import { StyleSheet } from 'react-native';
 
 const Stack = createNativeStackNavigator()
 
 const AuthStack = () => {
   return (
     <Stack.Navigator
-    initialRouteName='Signup'
+    initialRouteName='Login'
     screenOptions={
         ({route})=>{
             return {
@@ -25,3 +25,7 @@ const AuthStack = () => {
 }
 
 export default AuthStack
+
+const styles = StyleSheet.create({
+    
+})

@@ -10,6 +10,7 @@ const Orders = () => {
 
   const localId = useSelector(state => state.auth.value.localId)
   const {data,isSuccess,isError,error,isLoading} = useGetOrdersQuery(localId)
+  
   const [info,setInfo] = useState(true)
   const [errorMessage,setErrorMessage] = useState("")
   const [loading,setLoading] = useState(true)

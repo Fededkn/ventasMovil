@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo } from '@expo/vector-icons'
 import TabIcon from '../Components/TabIcon';
 
 import ShopStack from './ShopStack';
@@ -76,5 +75,4 @@ const styles = StyleSheet.create({
     
         elevation: 4,
     }
-
 })

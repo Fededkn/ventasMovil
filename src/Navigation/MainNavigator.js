@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './TabNavigator';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import AuthStack from './AuthStack';
 import { useSelector, useDispatch } from 'react-redux';
 import { fechSession } from '../database'
