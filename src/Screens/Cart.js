@@ -37,6 +37,7 @@ const Cart = () => {
             renderItem={({item})=> <CartItem item={item} onDelete={handleDeleteItem}/>}
         />
         <View style={styles.confirmContainer}>
+            {/* <Pressable onPress={()=> triggerPostOrder({ localId, order: cart })}> */}
             <Pressable onPress={handleConfirmOrder}>
                 <Text style={styles.confirmText}>Confirmar</Text>
             </Pressable>
